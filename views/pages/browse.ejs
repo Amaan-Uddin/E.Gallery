@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Browse</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="/styles/navStyles.css" />
+		<link rel="stylesheet" href="/styles/imageStyles.css" />
+	</head>
+	<body>
+		<%- include('../partials/_navbar',{home:'',browse:'active'}) %>
+		<section class="container mt-4 mb-4 px-4 display-1">
+			<h2>See what others have shared....</h2>
+		</section>
+		<section>
+			<% if(!imageArray.length){ %>
+			<div class="container mt-3">
+				<h5 class="text-muted text-capitalize">no images uploaded...</h5>
+			</div>
+			<% }else{ %>
+			<div class="container mt-3" id="imgContainer">
+				<% imageArray.forEach((image)=>{ %>
+				<div class="card-img" id="imgBox">
+					<img src="<%=image.image%>" loading="lazy" alt="" />
+					<p class="mt-2 fw-bold text-capitalize mb-1 card-title"><%= image.filename%></p>
+					<p class="mb-1 card-text">
+						Posted on
+						<%=`${image.createdAt.getDate()}/${image.createdAt.getMonth()+1}/${image.createdAt.getFullYear()}`%>
+					</p>
+					<p class="mb-2 card-text">By <span class="fw-bold"><%=image.user%></span></p>
+				</div>
+				<% })%>
+			</div>
+			<% } %>
+		</section>
+	</body>
+</html>
